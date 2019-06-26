@@ -12,14 +12,21 @@ class NoteEditorVC: UIViewController {
     
     @IBOutlet weak var noteEditorTextView: UITextView!
     
-    
+    var note: Note?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.navigationBar.tintColor = .white
         let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didTapDone))
         navigationItem.rightBarButtonItem = doneBarButtonItem
+        navigationItem.title = "New Note"
+        if let note = self.note {
+            noteEditorTextView.text = note.body
+            navigationItem.title = "Edit Note"
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,8 +39,13 @@ class NoteEditorVC: UIViewController {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
-        let newNote = Note(context: context)
-        newNote.body = noteEditorTextView.text
+        
+        if let note = self.note {
+            note.body = noteEditorTextView.text
+        } else {
+            let newNote = Note(context: context)
+            newNote.body = noteEditorTextView.text
+        }
         appDelegate.saveContext()
         
         navigationController?.popViewController(animated: true)

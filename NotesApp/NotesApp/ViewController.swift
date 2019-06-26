@@ -71,33 +71,44 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let note = notes[indexPath.row]
+        performSegue(withIdentifier: "segue.Main.NotesTableViewToNoteEditor", sender: note)
+    }
+      
+//
+//        let alert = UIAlertController(title: "Edit Note", message: nil, preferredStyle: .alert)
+//        alert.addTextField { (textField) in
+//            textField.text = note.body
+//        }
+//
+//        let updateAction = UIAlertAction(title: "Update", style: .default) { (_) in
+//
+//            guard let updatedNoteBody = alert.textFields?.first?.text,
+//                let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+//
+//            note.body = updatedNoteBody
+//            appDelegate.saveContext()
+//            self.loadNotes()
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+//
+//        alert.addAction(updateAction)
+//        alert.addAction(cancelAction)
+//        DispatchQueue.main.async {
+//            self.present(alert, animated: true)
+//        }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         
-        let alert = UIAlertController(title: "Edit Note", message: nil, preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            textField.text = note.body
-        }
-        
-        let updateAction = UIAlertAction(title: "Update", style: .default) { (_) in
+        if let noteEditorVC = segue.destination as? NoteEditorVC,
+            let note = sender as? Note {
             
-            guard let updatedNoteBody = alert.textFields?.first?.text,
-                let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            noteEditorVC.note = note
             
-            note.body = updatedNoteBody
-            appDelegate.saveContext()
-            self.loadNotes()
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        alert.addAction(updateAction)
-        alert.addAction(cancelAction)
-        DispatchQueue.main.async {
-            self.present(alert, animated: true)
-        }
-        
         
     }
-    
     
     
 }
