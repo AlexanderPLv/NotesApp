@@ -9,8 +9,8 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDataSource {
-
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     
     var notes = [Note]()
@@ -19,9 +19,15 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.delegate = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadNotes()
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notes.count
     }
@@ -31,6 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         let note = notes[indexPath.row]
         cell.textLabel?.text = note.body
         cell.textLabel?.numberOfLines = 0
+        cell.selectionStyle = .none
         
         return cell
         
@@ -56,26 +63,39 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func didTapBarButton(_ sender: Any) {
-       
-        let alert = UIAlertController(title: "Add Note", message: nil, preferredStyle: .alert)
-        alert.addTextField()
         
-        let saveAction = UIAlertAction(title: "Save Note", style: .default) { (_) in
-            
-         guard let noteBody = alert.textFields?.first?.text,
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            else { return }
-            
-            let context = appDelegate.persistentContainer.viewContext
-            let newNote = Note(context: context)
-            newNote.body = noteBody
-            self.notes.append(newNote)
-            
-            appDelegate.saveContext()
-            self.tableView.reloadData()
+        performSegue(withIdentifier: "segue.Main.NotesTableViewToNoteEditor", sender: nil)
+    
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let note = notes[indexPath.row]
+        
+        let alert = UIAlertController(title: "Edit Note", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = note.body
         }
-        alert.addAction(saveAction)
-        present(alert, animated: true)
+        
+        let updateAction = UIAlertAction(title: "Update", style: .default) { (_) in
+            
+            guard let updatedNoteBody = alert.textFields?.first?.text,
+                let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            
+            note.body = updatedNoteBody
+            appDelegate.saveContext()
+            self.loadNotes()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(updateAction)
+        alert.addAction(cancelAction)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
+        
+        
     }
     
     

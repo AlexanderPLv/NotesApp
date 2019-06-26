@@ -42,11 +42,44 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="7Fo-Kx-XkS" id="KXb-Dp-mfM"/>
+                        <segue destination="OFi-8I-QGb" kind="show" identifier="segue.Main.NotesTableViewToNoteEditor" id="KUp-md-7xl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="138.61607142857142"/>
+        </scene>
+        <!--Note EditorVC-->
+        <scene sceneID="VAl-Nq-h9c">
+            <objects>
+                <viewController id="OFi-8I-QGb" customClass="NoteEditorVC" customModule="NotesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GiJ-wh-N7e">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QC3-jF-W5I">
+                                <rect key="frame" x="20" y="140" width="374" height="756"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="QC3-jF-W5I" secondAttribute="bottom" id="Me3-Zz-Itx"/>
+                            <constraint firstItem="2cq-J7-pwQ" firstAttribute="trailing" secondItem="QC3-jF-W5I" secondAttribute="trailing" constant="20" id="VAB-ux-NDM"/>
+                            <constraint firstItem="QC3-jF-W5I" firstAttribute="top" secondItem="2cq-J7-pwQ" secondAttribute="top" id="ojC-Bo-uFv"/>
+                            <constraint firstItem="QC3-jF-W5I" firstAttribute="leading" secondItem="2cq-J7-pwQ" secondAttribute="leading" constant="20" id="wse-kM-fQm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2cq-J7-pwQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="noteEditorTextView" destination="QC3-jF-W5I" id="crq-CJ-xab"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3AN-ML-DDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1827.5362318840582" y="138.61607142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="B3N-oK-y8V">
