@@ -24,7 +24,7 @@ class NoteCell: UITableViewCell {
 }
 extension NoteCell {
     public func populate(with note: Note) {
-        categoryLabel.text = "mock category"
+        categoryLabel.text = note.category?.category
         noteBodyLabel.text = note.body
     }
     

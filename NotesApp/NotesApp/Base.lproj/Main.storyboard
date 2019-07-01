@@ -123,6 +123,7 @@
                         <viewLayoutGuide key="safeArea" id="2cq-J7-pwQ"/>
                     </view>
                     <connections>
+                        <outlet property="categoryTextField" destination="DPh-zx-Aek" id="qDh-zB-KJy"/>
                         <outlet property="noteEditorTextView" destination="QC3-jF-W5I" id="crq-CJ-xab"/>
                     </connections>
                 </viewController>

@@ -73,6 +73,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         performSegue(withIdentifier: "segue.Main.NotesTableViewToNoteEditor", sender: note)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard editingStyle == .delete else { return }
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let context = appDelegate?.persistentContainer.viewContext
+        
+        let note = notes[indexPath.row]
+        
+        do{
+            
+            context?.delete(note)
+            try context?.save()
+            
+            notes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+        } catch {
+            print(error)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -82,9 +104,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             noteEditorVC.note = note
             
         }
-        
     }
-    
     
 }
 

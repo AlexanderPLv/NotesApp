@@ -25,6 +25,7 @@
 		9A4B918C22C3C8600084114A /* NoteEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorVC.swift; sourceTree = "<group>"; };
 		9A4ECA5A22C9F4740053CD76 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9A4ECA5B22C9F4740053CD76 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9A4ECA5F22C9FC3A0053CD76 /* NotesApp2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesApp2.xcdatamodel; sourceTree = "<group>"; };
 		9AFAE66F22C64C3100AE8F66 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		9AFD60B622C228A100FB90F2 /* NotesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFD60B922C228A100FB90F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -367,9 +368,10 @@
 		9AFD60C022C228A100FB90F2 /* NotesApp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9A4ECA5F22C9FC3A0053CD76 /* NotesApp2.xcdatamodel */,
 				9AFD60C122C228A100FB90F2 /* NotesApp.xcdatamodel */,
 			);
-			currentVersion = 9AFD60C122C228A100FB90F2 /* NotesApp.xcdatamodel */;
+			currentVersion = 9A4ECA5F22C9FC3A0053CD76 /* NotesApp2.xcdatamodel */;
 			path = NotesApp.xcdatamodeld;
 			sourceTree = "<group>";
 			usesTabs = 0;
