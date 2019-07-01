@@ -13,7 +13,7 @@ class NoteEditorVC: UIViewController {
     @IBOutlet weak var noteEditorTextView: UITextView!
     
     var note: Note?
-    
+    var userDisSave = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +34,26 @@ class NoteEditorVC: UIViewController {
         noteEditorTextView.becomeFirstResponder()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if userDisSave == false {
+            saveNote()
+        }
+    }
+    
     
     @objc func didTapDone() {
+        userDisSave = true
+        saveNote()
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func saveNote() {
+        
+        guard
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+            noteEditorTextView.text.isEmpty == false
+            else { return }
         let context = appDelegate.persistentContainer.viewContext
         
         if let note = self.note {
@@ -48,7 +64,6 @@ class NoteEditorVC: UIViewController {
         }
         appDelegate.saveContext()
         
-        navigationController?.popViewController(animated: true)
     }
     
 }
